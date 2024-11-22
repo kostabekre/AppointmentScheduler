@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentSchedulerRazor", "AppointmentSchedulerRazor\AppointmentSchedulerRazor.csproj", "{584AA832-61E6-4577-972D-E745547E4C1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{508AD22C-F181-425A-AC99-AAE293CC22FC}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A6493294-E4D0-4FE2-8006-3A34220A52F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{035D5110-FC91-4092-82C1-689289ACA1B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases", "UseCases\UseCases.csproj", "{9D51573B-667A-4995-BA6F-DEE0FDE8D3C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{584AA832-61E6-4577-972D-E745547E4C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{584AA832-61E6-4577-972D-E745547E4C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{584AA832-61E6-4577-972D-E745547E4C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{584AA832-61E6-4577-972D-E745547E4C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6493294-E4D0-4FE2-8006-3A34220A52F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6493294-E4D0-4FE2-8006-3A34220A52F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6493294-E4D0-4FE2-8006-3A34220A52F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6493294-E4D0-4FE2-8006-3A34220A52F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{035D5110-FC91-4092-82C1-689289ACA1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{035D5110-FC91-4092-82C1-689289ACA1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{035D5110-FC91-4092-82C1-689289ACA1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{035D5110-FC91-4092-82C1-689289ACA1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D51573B-667A-4995-BA6F-DEE0FDE8D3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D51573B-667A-4995-BA6F-DEE0FDE8D3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D51573B-667A-4995-BA6F-DEE0FDE8D3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D51573B-667A-4995-BA6F-DEE0FDE8D3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
