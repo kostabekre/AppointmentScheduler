@@ -1,7 +1,28 @@
-﻿<h3>Home</h3>
+﻿@page "/"
+@rendermode InteractiveServer
 
+<h3>Calendar</h3>
 
+<div class="calendar">
+    <div class="day-of-weeks">
+        <ul class="horizontal-list">
+            <li>Monday</li>
+            <li>Tuesday</li>
+            <li>Wednesday</li>
+            <li>Thursday</li>
+            <li>Friday</li>
+            <li>Saturday</li>
+            <li>Sunday</li>
+        </ul>
+    </div>
+</div>
 
 @code {
-    
+    private DateTime SelectedDateTime { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SelectedDateTime = DateTime.Today;
+    }
+
 }

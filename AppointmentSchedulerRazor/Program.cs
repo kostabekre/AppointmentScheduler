@@ -1,4 +1,4 @@
-using AppontmentSchedulerRazor.Components;
+using AppointmentSchedulerRazor.Components;
 using Domain.Data.Config;
 using Infrastructure;
 using UseCases;

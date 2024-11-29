@@ -1,0 +1,12 @@
+﻿h3  {
+    color: yellowgreen;
+}
+
+.horizontal-list {
+    display: flex;
+    list-style: none;
+}
+
+.calendar {
+    background: black;
+}
