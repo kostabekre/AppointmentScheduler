@@ -1,10 +1,6 @@
 using AppontmentSchedulerRazor.Components;
-using Domain.Data;
-using Domain.Requests;
-using Infrastructure.Data;
-using Infrastructure.Repositories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Domain.Data.Config;
+using Infrastructure;
 using UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,13 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContext<AppointmentContext>(options =>
-    // options.UseNpgsql("ConnectionString"));
-    options.UseInMemoryDatabase("Appointment"));
+var dbConnectionOptions = builder.Configuration.GetSection(DbConnection.Position).Get<DbConnection>();
+
+if (dbConnectionOptions == null)
+{
+    throw new NullReferenceException("Configuration not founded");
+}
+
+builder.Services.AddDataBase(builder.Environment.IsDevelopment(), dbConnectionOptions);
+
+builder.Services.AddRepositories();
 
 builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<MediatRAssemblyMarker>());
-
-builder.Services.AddScoped<EmployeeRepository>();
 
 var app = builder.Build();
 
@@ -30,6 +31,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
+await app.CheckDb(app.Environment.IsDevelopment());
 
 app.UseHttpsRedirection();
 

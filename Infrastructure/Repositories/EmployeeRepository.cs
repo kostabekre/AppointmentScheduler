@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class EmployeeRepository
+internal class EmployeeRepository : IEmployeeRepository
 {
     private readonly AppointmentContext _context;
 
@@ -15,6 +15,20 @@ public class EmployeeRepository
 
     public async Task<IEnumerable<Employee>> GetEmployeesAsync()
     {
-        return await _context.Employees.ToListAsync();
+        return await _context.Employees
+            .Include(x => x.Team)
+            .Include(x => x.Title)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public void AddEmployee(Employee employee)
+    {
+        _context.Employees.Add(employee);
+    }
+
+    public Task SaveChangesAsync()
+    {
+        return _context.SaveChangesAsync();
     }
 }

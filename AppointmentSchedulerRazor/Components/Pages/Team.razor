@@ -1,0 +1,29 @@
+﻿@page "/Team"
+@using MediatR
+@using UseCases.Team
+@inject IMediator Mediator
+@rendermode InteractiveServer
+
+<h3>Team</h3>
+
+<label>
+    Team Name:
+    <input type="text" @bind="Name">
+    <button @onclick="CreateTeam">Create</button>
+</label>
+
+@code {
+    private string? Name { get; set; }
+
+    private async Task CreateTeam()
+    {
+        if (Name == null)
+        {
+            return;
+        }
+        
+        await Mediator.Send(new CreateTeamRequest(new Domain.Data.Team(){Name = Name}));
+
+        Name = null;
+    }
+}

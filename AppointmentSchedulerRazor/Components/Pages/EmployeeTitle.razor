@@ -1,0 +1,29 @@
+﻿@page "/EmployeeTitle"
+@using MediatR
+@using UseCases.EmployeeTitle
+@inject IMediator Mediator;
+@rendermode InteractiveServer
+
+<h3>EmployeeTitle</h3>
+
+<label>
+    Title:
+    <input type="text" @bind="Title">
+    <button @onclick="CreateTeam">Create</button>
+</label>
+
+@code {
+    private string? Title { get; set; }
+
+    private async Task CreateTeam()
+    {
+        if (Title == null)
+        {
+            return;
+        }
+        
+        await Mediator.Send(new CreateEmployeeTitleRequest(new Domain.Data.EmployeeTitle() {Name = Title}));
+
+        Title = null;
+    }
+}

@@ -1,0 +1,109 @@
+﻿@page "/"
+@using Domain.Data
+@using MediatR
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using UseCases.Employee
+@using UseCases.EmployeeTitle
+@using UseCases.Team
+@inject IMediator Mediator
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<NavLink href="Team">Create Team</NavLink>
+
+<NavLink href="EmployeeTitle">Create title</NavLink>
+
+<h3>Create Employee</h3>
+
+<select @bind="SelectedTitleId">
+    <option value="0">Choose a title</option>
+    @foreach (var title in EmployeeTitles)
+    {
+        <option value="@title.Value">@title.Text</option>
+    }
+</select>
+
+<select @bind="SelectedTeamId">
+    <option value="0">Choose a team</option>
+    @foreach (var team in Teams)
+    {
+        <option value="@team.Value">@team.Text</option>
+    }
+</select>
+
+<label>
+    Email:
+    <input @bind="Email"/>
+</label>
+
+<label>
+    Employee name:
+    <input @bind="NewEmployeeName"/>
+</label>
+<button @onclick="AddEmployee">Create</button>
+
+<p>List of employees:</p>
+<ul>
+    @if (!Employees.Any())
+    {
+        <p>There is no employees!</p>
+    }
+    @foreach (var employee in Employees)
+    {
+        <li>@employee.Title.Name @employee.Name @employee.Team.Name</li>
+    }
+</ul>
+
+
+@code {
+    private IEnumerable<Domain.Data.Employee> Employees { get; set; } = null!;
+
+    private List<SelectListItem> EmployeeTitles { get; set; } = null!;
+    private int SelectedTitleId { get; set; }
+
+    private List<SelectListItem> Teams { get; set; } = null!;
+    private int SelectedTeamId { get; set; }
+
+    private string? NewEmployeeName { get; set; }
+    private string? Email { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadEmployees();
+
+        EmployeeTitles = (await Mediator.Send(new GetEmployeeTitleRequest()))
+            .Select(t => new SelectListItem(t.Name, t.Id.ToString()))
+            .ToList();
+
+        Teams = (await Mediator.Send(new GetTeamsRequest()))
+            .Select(t => new SelectListItem(t.Name, t.Id.ToString()))
+            .ToList();
+    }
+
+    private async Task LoadEmployees()
+    {
+        var result = await Mediator.Send(new GetEmployeesRequest());
+
+        Employees = result.Data!;
+    }
+
+    private async Task AddEmployee()
+    {
+        if (NewEmployeeName == null || Email == null || SelectedTitleId == 0 || SelectedTeamId == 0)
+        {
+            return;
+        }
+
+        var employee = new Domain.Data.Employee() { Email = Email, Name = NewEmployeeName, TeamId = SelectedTeamId, TitleId = SelectedTitleId };
+        await Mediator.Send(new CreateEmployeeRequest(employee));
+
+        NewEmployeeName = string.Empty;
+        SelectedTitleId = 0;
+        SelectedTeamId = 0;
+        Email = string.Empty;
+
+        await LoadEmployees();
+    }
+
+}

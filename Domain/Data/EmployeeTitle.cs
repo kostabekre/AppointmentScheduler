@@ -1,8 +1,7 @@
 ﻿namespace Domain.Data;
 
-public class Team
+public class EmployeeTitle
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
-    public IEnumerable<Employee>? Employees { get; set; }
 }

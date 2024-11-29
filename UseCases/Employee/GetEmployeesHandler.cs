@@ -4,11 +4,11 @@ using MediatR;
 
 namespace UseCases.Employee;
 
-public sealed class GetEmployeesHandler : IRequestHandler<GetEmployeesRequest, Result<IEnumerable<Domain.Data.Employee>>>
+internal sealed class GetEmployeesHandler : IRequestHandler<GetEmployeesRequest, Result<IEnumerable<Domain.Data.Employee>>>
 {
-    private readonly EmployeeRepository _repository;
+    private readonly IEmployeeRepository _repository;
 
-    public GetEmployeesHandler(EmployeeRepository repository)
+    public GetEmployeesHandler(IEmployeeRepository repository)
     {
         _repository = repository;
     }
